@@ -1,0 +1,246 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Header Section */
+.App-header {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 15px 20px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-name a,
+.nav-list li a {
+  font-family: 'Courier New', Courier, monospace;
+  color: #61fb85;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.brand-name a:hover,
+.nav-list li a:hover {
+  color: #ffffff;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headline Styles */
+.headline-section {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.headline {
+  font-size: 3rem;
+  font-family: 'TT Espina', serif;
+  color: #000000;
+  margin: 10px 0;
+}
+
+/* Main Content Section */
+main {
+  background-color: #ffffff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Slideshow Section */
+.slideshow-container {
+  padding: 20px;
+  background-color: #dacb28;
+  height: 100vh;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-iframe {
+  width: 100%;
+  height: 150vh;
+  border: none;
+  object-fit: cover;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 1.2rem;
+    padding: 15px;
+  }
+
+  .slideshow-container {
+    height: 80vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .slideshow-container {
+    height: 70vh;
+  }
+}
+
+/* Animation for Smooth Transition */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* About Section */
+.about-section {
+  padding: 50px 20px;
+  background-color: #f9f9f9;
+  color: #333;
+  text-align: center;
+  border-radius: 8px;
+  margin: 40px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.about-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.contact-section {
+  text-align: center;
+  width: 80%; /* Adjust as needed */
+  max-width: 600px;
+  margin: 0 auto; /* Centers horizontally */
+  padding: 20px 10px;
+  background-color: #000000;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  margin-bottom: 40px;
+}
+
+.contact-section h2 {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.3s ease-in-out;
+  width: 260px;
+  justify-content: center;
+}
+
+.contact-icon {
+  font-size: 1.8rem;
+}
+
+.whatsapp {
+  background-color: #25d366;
+  color: white;
+}
+
+.telegram {
+  background-color: #0088cc;
+  color: white;
+}
+
+.instagram {
+  background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+}
+
+.contact-link:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+/* Footer Styles */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 14px;
+}
+
+.footer-left {
+  font-size: 14px;
+}
+
+.footer-right {
+  display: flex;
+  gap: 15px;
+}
+
+.contact-icon {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-icon:hover {
+  color: #61dafb;
+  transform: scale(1.2);
+}
