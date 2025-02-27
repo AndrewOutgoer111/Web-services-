@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import './App.css';
 import "slick-carousel/slick/slick.css";
