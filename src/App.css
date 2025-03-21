@@ -64,33 +64,50 @@ main {
 
 /* Slideshow Section */
 .slideshow-container {
-  padding: 20px;
+  padding: 10px;
   background-color: #dacb28;
-  height: 100vh;
+  min-height: 100vh; /* Ensure it takes the full viewport height */
   width: 100%;
-  max-width: 1200px;
+  max-width: 100%; /* Prevent overflow */
   margin: 0 auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box; /* Prevents padding from affecting width */
 }
 
+/* Slide container */
 .slide {
   width: 100%;
-  height: 100%;
+  flex: 1; /* Allows it to take available height */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Responsive iframe */
 .slide-iframe {
   width: 100%;
-  height: 150vh;
+  height: 100vh; /* Match viewport height */
+  max-height: calc(100vh - 20px); /* Adjust dynamically */
   border: none;
   object-fit: cover;
 }
+
+/* Make it more responsive for small screens */
+@media screen and (max-width: 600px) {
+  .slideshow-container {
+    padding: 5px;
+  }
+
+  .slide-iframe {
+    height: 90vh; /* Allows better fit for small screens */
+  }
+}
+
+
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
