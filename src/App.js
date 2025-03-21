@@ -146,7 +146,7 @@ const App = () => {
       <i className="fab fa-whatsapp"></i>
     </a>
     <a 
-      href="https://t.me/AndrewWillDoIt" 
+      href="https://t.me/+971544571947" 
       target="_blank" 
       rel="noopener noreferrer" 
       className="contact-icon" 
