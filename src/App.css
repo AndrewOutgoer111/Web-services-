@@ -56,7 +56,7 @@
 
 /* Main Content Section */
 main {
-  background-color: #1a1a1a;
+  background-color: #d4edda;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -236,7 +236,7 @@ main {
   justify-content: space-between;
   align-items: center;
   background-color: #222;
-  color: #fff;
+  color: #61fb85;
   padding: 15px 30px;
   font-size: 14px;
 }
@@ -251,7 +251,7 @@ main {
 }
 
 .contact-icon {
-  color: #fff;
+  color: #ffffff;
   font-size: 20px;
   text-decoration: none;
   transition: color 0.3s ease, transform 0.2s ease;
