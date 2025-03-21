@@ -71,7 +71,7 @@ const App = () => {
       <section id="about" className="about-section">
         <h2>About Us</h2>
         <p>
-          Welcome to AndrewWillDoIt! We specialize in providing simple and effective web solutions
+          Welcome to AndreWillDoIt! We specialize in providing simple and effective web solutions
           for small to medium businesses. Our goal is to make technology work for you, with a focus
           on quality and convenience.
         </p>
@@ -109,7 +109,7 @@ const App = () => {
         <header className="App-header">
           <div className="header-container">
             <div className="brand-name">
-              <Link to="/" aria-label="Brand Name">AndrewWillDoIt</Link>
+              <Link to="/" aria-label="Brand Name">AndreWillDoIt</Link>
             </div>
             <nav>
               <ul className="nav-list">
@@ -133,7 +133,7 @@ const App = () => {
         {/* Footer */}
         <footer className="footer-container">
   <div className="footer-left">
-    <p>© 2025 AndrewWillDoIt. All rights reserved.</p>
+    <p>© 2025 AndreWillDoIt. All rights reserved.</p>
   </div>
   <div className="footer-right">
     <a 
