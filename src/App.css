@@ -104,6 +104,7 @@ main {
 
   .slide-iframe {
     height: 90vh; /* Allows better fit for small screens */
+    pointer-events: none; /* Allow touch gestures to pass through the iframe */
   }
 }
 
