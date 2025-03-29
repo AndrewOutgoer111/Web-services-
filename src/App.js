@@ -6,12 +6,26 @@ import "slick-carousel/slick/slick-theme.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 
-
 // Component Imports
 import AboutPage from './components/AboutPage';
 
-
 const App = () => {
+  // Function to disable iframe interaction during swipe
+  const handleBeforeChange = () => {
+    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
+    });
+  };
+
+  // Function to re-enable iframe interaction after swipe
+  const handleAfterChange = () => {
+    setTimeout(() => {
+      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
+      });
+    }, 500);
+  };
+
   // Slider configuration
   const sliderSettings = {
     dots: true,
@@ -21,8 +35,10 @@ const App = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
-    swipe: true, // Enable swipe gestures
-    touchMove: true, // Allow touch-based movement
+    swipe: true,
+    touchMove: true,
+    beforeChange: handleBeforeChange, // Fix swipe issue
+    afterChange: handleAfterChange,
     responsive: [
       {
         breakpoint: 1024,
@@ -80,27 +96,20 @@ const App = () => {
       </section>
 
       {/* Contact Section */}
-      
-
-<section id="contact" className="contact-section">
-  <h2>Contact Me</h2>
-  <div className="contact-links">
-    <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-link whatsapp">
-      <FaWhatsapp className="contact-icon" />
-     WhatsApp
-    </a>
-    <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-link telegram">
-      <FaTelegramPlane className="contact-icon" />
-      Telegram
-    </a>
-    <a href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/" target="_blank" rel="noopener noreferrer" className="contact-link instagram">
-      <FaInstagram className="contact-icon" />
-      Instagram
-    </a>
-  </div>
-</section>
-
-
+      <section id="contact" className="contact-section">
+        <h2>Contact Me</h2>
+        <div className="contact-links">
+          <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-link whatsapp">
+            <FaWhatsapp className="contact-icon" /> WhatsApp
+          </a>
+          <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-link telegram">
+            <FaTelegramPlane className="contact-icon" /> Telegram
+          </a>
+          <a href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/" target="_blank" rel="noopener noreferrer" className="contact-link instagram">
+            <FaInstagram className="contact-icon" /> Instagram
+          </a>
+        </div>
+      </section>
     </div>
   );
 
@@ -117,7 +126,6 @@ const App = () => {
               <ul className="nav-list">
                 <li><Link to="/" aria-label="Home Page">Home</Link></li>
                 <li><Link to="/about" aria-label="About Page">About</Link></li>
-            
               </ul>
             </nav>
           </div>
@@ -128,47 +136,44 @@ const App = () => {
           <Routes>
             <Route path="/" element={<HomeWithSlideshow />} />
             <Route path="/about" element={<AboutPage />} />
-            
           </Routes>
         </main>
 
         {/* Footer */}
         <footer className="footer-container">
-  <div className="footer-left">
-    <p>© 2025 AndreWillDoIt. All rights reserved.</p>
-  </div>
-  <div className="footer-right">
-    <a 
-      href="https://wa.me/1234567890" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      className="contact-icon" 
-      aria-label="WhatsApp"
-    >
-      <i className="fab fa-whatsapp"></i>
-    </a>
-    <a 
-      href="https://t.me/+971544571947" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      className="contact-icon" 
-      aria-label="Telegram"
-    >
-      <i className="fab fa-telegram-plane"></i>
-    </a>
-    <a 
-      href="https://instagram.com/AndrewWillDoIt" 
-      target="_blank" 
-      rel="noopener noreferrer" 
-      className="contact-icon" 
-      aria-label="Instagram"
-    >
-      <i className="fab fa-instagram"></i>
-    </a>
-  </div>
-</footer>
-
-
+          <div className="footer-left">
+            <p>© 2025 AndreWillDoIt. All rights reserved.</p>
+          </div>
+          <div className="footer-right">
+            <a 
+              href="https://wa.me/+971544571947" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-icon" 
+              aria-label="WhatsApp"
+            >
+              <FaWhatsapp />
+            </a>
+            <a 
+              href="https://t.me/YOUR_TELEGRAM_USERNAME" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-icon" 
+              aria-label="Telegram"
+            >
+              <FaTelegramPlane />
+            </a>
+            <a 
+              href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-icon" 
+              aria-label="Instagram"
+            >
+              <FaInstagram />
+            </a>
+          </div>
+        </footer>
       </div>
     </Router>
   );
