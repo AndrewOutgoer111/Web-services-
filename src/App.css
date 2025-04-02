@@ -138,6 +138,18 @@ main {
   }
 }
 
+/* Overlay to prevent iframe interaction while swiping */
+.swipe-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 2; /* Ensures it sits above the iframe */
+}
+
+
 /* About Section */
 .about-section {
   padding: 50px 20px;

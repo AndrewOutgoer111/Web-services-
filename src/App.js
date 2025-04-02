@@ -1,5 +1,6 @@
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import { useState } from 'react';
 import './App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,20 +11,17 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
+  // State to track swipe activity
+  const [isSwiping, setIsSwiping] = useState(false);
+
   // Function to disable iframe interaction during swipe
   const handleBeforeChange = () => {
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
-    });
+    setIsSwiping(true);
   };
 
   // Function to re-enable iframe interaction after swipe
   const handleAfterChange = () => {
-    setTimeout(() => {
-      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
-      });
-    }, 500);
+    setTimeout(() => setIsSwiping(false), 300); // Small delay to avoid flickering
   };
 
   // Slider configuration
@@ -37,17 +35,11 @@ const App = () => {
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
-    beforeChange: handleBeforeChange, // Fix swipe issue
+    beforeChange: handleBeforeChange,
     afterChange: handleAfterChange,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 1 },
-      },
-      {
-        breakpoint: 600,
-        settings: { slidesToShow: 1 },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 1 } },
+      { breakpoint: 600, settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -70,6 +62,7 @@ const App = () => {
 
       {/* Slideshow Section */}
       <div className="slideshow-container" role="region" aria-label="Website Showcase">
+        {isSwiping && <div className="swipe-overlay"></div>} {/* Overlay to disable interaction */}
         <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
