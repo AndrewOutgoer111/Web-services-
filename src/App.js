@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import { useState, useEffect } from 'react';
+import { useRef } from 'react';
 import './App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,21 +11,20 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
-  const [isSwiping, setIsSwiping] = useState(false);
-
-  useEffect(() => {
-    const iframes = document.querySelectorAll(".slide-iframe");
-    iframes.forEach((iframe) => {
-      iframe.style.pointerEvents = isSwiping ? "none" : "auto";
-    });
-  }, [isSwiping]);
+  const sliderRef = useRef(null);
 
   const handleBeforeChange = () => {
-    setIsSwiping(true);
+    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
+    });
   };
 
   const handleAfterChange = () => {
-    setTimeout(() => setIsSwiping(false), 500);
+    setTimeout(() => {
+      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
+      });
+    }, 500);
   };
 
   const sliderSettings = {
@@ -40,6 +39,7 @@ const App = () => {
     touchMove: true,
     beforeChange: handleBeforeChange,
     afterChange: handleAfterChange,
+    ref: sliderRef, // Use ref to control the slider properly
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 1 } },
       { breakpoint: 600, settings: { slidesToShow: 1 } },
@@ -61,7 +61,7 @@ const App = () => {
       </section>
 
       <div className="slideshow-container">
-        <Slider {...sliderSettings}>
+        <Slider {...sliderSettings} ref={sliderRef}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
               <iframe
