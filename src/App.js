@@ -1,6 +1,5 @@
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import { useRef } from 'react';
 import './App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,39 +10,38 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
-  const sliderRef = useRef(null);
-
-  const disableIframes = () => {
-    document.querySelectorAll(".slide-iframe").forEach(iframe => {
+  // Function to disable iframe interaction during swipe
+  const handleBeforeChange = () => {
+    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
       iframe.style.pointerEvents = "none"; // Instantly disable interaction
     });
   };
 
-  const enableIframes = () => {
-    document.querySelectorAll(".slide-iframe").forEach(iframe => {
-      iframe.style.pointerEvents = "auto"; // Instantly re-enable interaction
+  // Function to re-enable iframe interaction after swipe
+  const handleAfterChange = () => {
+    requestAnimationFrame(() => {
+      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+        iframe.style.pointerEvents = "auto"; // Instantly re-enable interaction
+      });
     });
   };
 
+  // Slider configuration
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 400, // Reduced speed for faster swipe response
+    speed: 400, // Faster response for swipes
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
-    beforeChange: disableIframes,
-    afterChange: enableIframes,
-    ref: sliderRef,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 1 } },
-      { breakpoint: 600, settings: { slidesToShow: 1 } },
-    ],
+    beforeChange: handleBeforeChange,
+    afterChange: handleAfterChange,
   };
 
+  // URLs for GitHub deployed pages
   const githubPages = [
     { url: 'https://andrewoutgoer111.github.io/mas1/', caption: 'Page 1' },
     { url: 'https://andrewoutgoer111.github.io/webpage2/', caption: 'Page 2' },
@@ -59,7 +57,7 @@ const App = () => {
       </section>
 
       <div className="slideshow-container">
-        <Slider {...sliderSettings} ref={sliderRef}>
+        <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
               <iframe
@@ -99,23 +97,6 @@ const App = () => {
             <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
-
-        <footer className="footer-container">
-          <div className="footer-left">
-            <p>© 2025 AndreWillDoIt. All rights reserved.</p>
-          </div>
-          <div className="footer-right">
-            <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="WhatsApp">
-              <FaWhatsapp />
-            </a>
-            <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="Telegram">
-              <FaTelegramPlane />
-            </a>
-            <a href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="Instagram">
-              <FaInstagram />
-            </a>
-          </div>
-        </footer>
       </div>
     </Router>
   );
