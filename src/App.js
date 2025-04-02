@@ -13,33 +13,31 @@ import AboutPage from './components/AboutPage';
 const App = () => {
   const sliderRef = useRef(null);
 
-  const handleBeforeChange = () => {
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
+  const disableIframes = () => {
+    document.querySelectorAll(".slide-iframe").forEach(iframe => {
+      iframe.style.pointerEvents = "none"; // Instantly disable interaction
     });
   };
 
-  const handleAfterChange = () => {
-    setTimeout(() => {
-      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
-      });
-    }, 500);
+  const enableIframes = () => {
+    document.querySelectorAll(".slide-iframe").forEach(iframe => {
+      iframe.style.pointerEvents = "auto"; // Instantly re-enable interaction
+    });
   };
 
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 400, // Reduced speed for faster swipe response
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
-    beforeChange: handleBeforeChange,
-    afterChange: handleAfterChange,
-    ref: sliderRef, // Use ref to control the slider properly
+    beforeChange: disableIframes,
+    afterChange: enableIframes,
+    ref: sliderRef,
     responsive: [
       { breakpoint: 1024, settings: { slidesToShow: 1 } },
       { breakpoint: 600, settings: { slidesToShow: 1 } },
