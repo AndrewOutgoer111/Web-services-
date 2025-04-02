@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,20 +11,23 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
-  // State to track swipe activity
   const [isSwiping, setIsSwiping] = useState(false);
 
-  // Function to disable iframe interaction during swipe
+  useEffect(() => {
+    const iframes = document.querySelectorAll(".slide-iframe");
+    iframes.forEach((iframe) => {
+      iframe.style.pointerEvents = isSwiping ? "none" : "auto";
+    });
+  }, [isSwiping]);
+
   const handleBeforeChange = () => {
     setIsSwiping(true);
   };
 
-  // Function to re-enable iframe interaction after swipe
   const handleAfterChange = () => {
-    setTimeout(() => setIsSwiping(false), 300); // Small delay to avoid flickering
+    setTimeout(() => setIsSwiping(false), 500);
   };
 
-  // Slider configuration
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -43,7 +46,6 @@ const App = () => {
     ],
   };
 
-  // URLs for GitHub deployed pages
   const githubPages = [
     { url: 'https://andrewoutgoer111.github.io/mas1/', caption: 'Page 1' },
     { url: 'https://andrewoutgoer111.github.io/webpage2/', caption: 'Page 2' },
@@ -52,17 +54,13 @@ const App = () => {
     { url: 'https://andrewoutgoer111.github.io/webpage5/', caption: 'Page 5' },
   ];
 
-  // Home component with GitHub page links in the slideshow
   const HomeWithSlideshow = () => (
     <div>
-      {/* Headline Section */}
       <section className="headline-section">
         <h1 className="headline">Order Your Website Solution Today!</h1>
       </section>
 
-      {/* Slideshow Section */}
-      <div className="slideshow-container" role="region" aria-label="Website Showcase">
-        {isSwiping && <div className="swipe-overlay"></div>} {/* Overlay to disable interaction */}
+      <div className="slideshow-container">
         <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
@@ -77,39 +75,12 @@ const App = () => {
           ))}
         </Slider>
       </div>
-
-      {/* About Section */}
-      <section id="about" className="about-section">
-        <h2>About Us</h2>
-        <p>
-          Welcome to AndreWillDoIt! We specialize in providing simple and effective web solutions
-          for small to medium businesses. Our goal is to make technology work for you, with a focus
-          on quality and convenience.
-        </p>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="contact-section">
-        <h2>Contact Me</h2>
-        <div className="contact-links">
-          <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-link whatsapp">
-            <FaWhatsapp className="contact-icon" /> WhatsApp
-          </a>
-          <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-link telegram">
-            <FaTelegramPlane className="contact-icon" /> Telegram
-          </a>
-          <a href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/" target="_blank" rel="noopener noreferrer" className="contact-link instagram">
-            <FaInstagram className="contact-icon" /> Instagram
-          </a>
-        </div>
-      </section>
     </div>
   );
 
   return (
     <Router>
       <div className="App">
-        {/* Header */}
         <header className="App-header">
           <div className="header-container">
             <div className="brand-name">
@@ -124,7 +95,6 @@ const App = () => {
           </div>
         </header>
 
-        {/* Main Content */}
         <main>
           <Routes>
             <Route path="/" element={<HomeWithSlideshow />} />
@@ -132,37 +102,18 @@ const App = () => {
           </Routes>
         </main>
 
-        {/* Footer */}
         <footer className="footer-container">
           <div className="footer-left">
             <p>© 2025 AndreWillDoIt. All rights reserved.</p>
           </div>
           <div className="footer-right">
-            <a 
-              href="https://wa.me/+971544571947" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-icon" 
-              aria-label="WhatsApp"
-            >
+            <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="WhatsApp">
               <FaWhatsapp />
             </a>
-            <a 
-              href="https://t.me/YOUR_TELEGRAM_USERNAME" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-icon" 
-              aria-label="Telegram"
-            >
+            <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="Telegram">
               <FaTelegramPlane />
             </a>
-            <a 
-              href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-icon" 
-              aria-label="Instagram"
-            >
+            <a href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="Instagram">
               <FaInstagram />
             </a>
           </div>
