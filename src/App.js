@@ -1,185 +1,95 @@
-import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import './App.css';
-import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 
-// Component Imports
-import AboutPage from './components/AboutPage';
+function App() {
+  const [isSwiping, setIsSwiping] = useState(false);
 
-const App = () => {
-  // Function to disable iframe interaction during swipe
-  const handleBeforeChange = () => {
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
-    });
-  };
-
-  // Function to re-enable iframe interaction after swipe
-  const handleAfterChange = () => {
-    requestAnimationFrame(() => {
-      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
-      });
-    });
-  };
-
-  // Slider configuration
-  const sliderSettings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
     swipe: true,
-    touchMove: true,
-    beforeChange: handleBeforeChange, // Fix swipe issue
-    afterChange: handleAfterChange,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: { slidesToShow: 1 },
-      },
-      {
-        breakpoint: 600,
-        settings: { slidesToShow: 1 },
-      },
-    ],
-    touchThreshold: 10, // Threshold for swipe to be recognized
+    swipeToSlide: true,
+    beforeChange: () => setIsSwiping(true),   // when swipe starts
+    afterChange: () => setIsSwiping(false),   // when swipe ends
   };
 
-  // URLs for GitHub deployed pages
-  const githubPages = [
-    { url: 'https://andrewoutgoer111.github.io/mas1/', caption: 'Page 1' },
-    { url: 'https://andrewoutgoer111.github.io/webpage2/', caption: 'Page 2' },
-    { url: 'https://andrewoutgoer111.github.io/webpage3/', caption: 'Page 3' },
-    { url: 'https://andrewoutgoer111.github.io/webpage4/', caption: 'Page 4' },
-    { url: 'https://andrewoutgoer111.github.io/webpage5/', caption: 'Page 5' },
+  const slides = [
+    "https://www.youtube.com/embed/your_video_id_1",
+    "https://www.youtube.com/embed/your_video_id_2",
+    "https://www.youtube.com/embed/your_video_id_3",
   ];
 
-  // Home component with GitHub page links in the slideshow
-  const HomeWithSlideshow = () => (
-    <div>
-      {/* Headline Section */}
-      <section className="headline-section">
-        <h1 className="headline">Order Your Website Solution Today!</h1>
-      </section>
+  return (
+    <div className="App">
+      <header className="App-header">
+        <div className="header-container">
+          <div className="brand-name">
+            <a href="/">YourBrand</a>
+          </div>
+          <ul className="nav-list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </header>
 
-      {/* Slideshow Section */}
-      <div className="slideshow-container" role="region" aria-label="Website Showcase">
-        <Slider {...sliderSettings}>
-          {githubPages.map((page, index) => (
-            <div key={index} className="slide">
-              <div className="iframe-container">
+      <main>
+        <section className="headline-section">
+          <h1 className="headline">Welcome to Our Website</h1>
+        </section>
+
+        <section className="slideshow-container">
+          {isSwiping && <div className="swipe-overlay" />}
+          <Slider {...settings}>
+            {slides.map((url, index) => (
+              <div key={index} className="slide">
                 <iframe
-                  src={page.url}
-                  title={`GitHub Page ${index + 1}`}
                   className="slide-iframe"
-                  loading="lazy"
+                  src={url}
+                  title={`Slide ${index}`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
                 ></iframe>
               </div>
-              <h3 className="slide-caption">{page.caption}</h3>
-            </div>
-          ))}
-        </Slider>
-      </div>
+            ))}
+          </Slider>
+        </section>
 
-      {/* About Section */}
-      <section id="about" className="about-section">
-        <h2>About Us</h2>
-        <p>
-          Welcome to AndreWillDoIt! We specialize in providing simple and effective web solutions
-          for small to medium businesses. Our goal is to make technology work for you, with a focus
-          on quality and convenience.
-        </p>
-      </section>
+        <section id="about" className="about-section">
+          <h2>About Us</h2>
+          <p>We provide amazing services to our clients worldwide.</p>
+        </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="contact-section">
-        <h2>Contact Me</h2>
-        <div className="contact-links">
-          <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-link whatsapp">
-            <FaWhatsapp className="contact-icon" /> WhatsApp
-          </a>
-          <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-link telegram">
-            <FaTelegramPlane className="contact-icon" /> Telegram
-          </a>
-          <a href="https://www.instagram.com/YOUR_INSTAGRAM_USERNAME/" target="_blank" rel="noopener noreferrer" className="contact-link instagram">
-            <FaInstagram className="contact-icon" /> Instagram
-          </a>
+        <section id="contact" className="contact-section">
+          <h2>Contact Us</h2>
+          <div className="contact-links">
+            <a href="https://wa.me/your_whatsapp" className="contact-link whatsapp">
+              <span className="contact-icon">📱</span> WhatsApp
+            </a>
+            <a href="https://t.me/your_telegram" className="contact-link telegram">
+              <span className="contact-icon">✈️</span> Telegram
+            </a>
+            <a href="https://instagram.com/your_instagram" className="contact-link instagram">
+              <span className="contact-icon">📷</span> Instagram
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer-container">
+        <div className="footer-left">© 2025 YourBrand. All rights reserved.</div>
+        <div className="footer-right">
+          <a href="https://wa.me/your_whatsapp" className="contact-icon">📱</a>
+          <a href="https://t.me/your_telegram" className="contact-icon">✈️</a>
+          <a href="https://instagram.com/your_instagram" className="contact-icon">📷</a>
         </div>
-      </section>
+      </footer>
     </div>
   );
-
-  return (
-    <Router>
-      <div className="App">
-        {/* Header */}
-        <header className="App-header">
-          <div className="header-container">
-            <div className="brand-name">
-              <Link to="/" aria-label="Brand Name">AndreWillDoIt</Link>
-            </div>
-            <nav>
-              <ul className="nav-list">
-                <li><Link to="/" aria-label="Home Page">Home</Link></li>
-                <li><Link to="/about" aria-label="About Page">About</Link></li>
-              </ul>
-            </nav>
-          </div>
-        </header>
-
-        {/* Main Content */}
-        <main>
-          <Routes>
-            <Route path="/" element={<HomeWithSlideshow />} />
-            <Route path="/about" element={<AboutPage />} />
-          </Routes>
-        </main>
-
-        {/* Footer */}
-        <footer className="footer-container">
-          <div className="footer-left">
-            <p>© 2025 AndreWillDoIt. All rights reserved.</p>
-          </div>
-          <div className="footer-right">
-            <a 
-              href="https://wa.me/+971544571947" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-icon" 
-              aria-label="WhatsApp"
-            >
-              <FaWhatsapp />
-            </a>
-            <a 
-              href="https://t.me/YOUR_TELEGRAM_USERNAME" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-icon" 
-              aria-label="Telegram"
-            >
-              <FaTelegramPlane />
-            </a>
-            <a 
-              href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="contact-icon" 
-              aria-label="Instagram"
-            >
-              <FaInstagram />
-            </a>
-          </div>
-        </footer>
-      </div>
-    </Router>
-  );
-};
+}
 
 export default App;
