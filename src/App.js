@@ -49,6 +49,7 @@ const App = () => {
         settings: { slidesToShow: 1 },
       },
     ],
+    touchThreshold: 10, // Threshold for swipe to be recognized
   };
 
   // URLs for GitHub deployed pages
