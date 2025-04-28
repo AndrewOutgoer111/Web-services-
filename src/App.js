@@ -73,14 +73,24 @@ const App = () => {
         <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
-              <div className="iframe-container">
-                <iframe
-                  src={page.url}
-                  title={`GitHub Page ${index + 1}`}
-                  className="slide-iframe"
-                  loading="lazy"
-                ></iframe>
-              </div>
+           <div className="iframe-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+   <div className="swipe-overlay" style={{
+      position: 'absolute',
+       top: 0,
+      left: 0,
+       width: '100%',
+       height: '100%',
+       zIndex: 2,
+     }} />
+     <iframe
+       src={page.url}
+       title={`GitHub Page ${index + 1}`}
+       className="slide-iframe"
+      loading="lazy"
+      style={{ zIndex: 1 }}
+   ></iframe>
+  </div>
+
               <h3 className="slide-caption">{page.caption}</h3>
             </div>
           ))}
