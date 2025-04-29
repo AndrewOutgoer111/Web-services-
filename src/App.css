@@ -311,6 +311,8 @@ main {
 /* Force pointer-events none for small screens always */
 @media screen and (max-width: 768px) {
   .slide-iframe {
+    height: 80vh;            /* Leaves space for scrolling */
+    max-height: 80vh;
     pointer-events: none !important; /* Prevent iframe from blocking touch */
   }
 }
