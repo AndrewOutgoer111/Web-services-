@@ -94,6 +94,8 @@ main {
   max-height: calc(100vh - 20px); /* Adjust dynamically */
   border: none;
   object-fit: cover;
+  pointer-events: auto;
+
 }
 
 /* Make it more responsive for small screens */
@@ -273,4 +275,31 @@ main {
 .contact-icon:hover {
   color: #61dafb;
   transform: scale(1.2);
+}
+
+/* ==== Added for iframe swipe fix ==== */
+
+.iframe-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Show overlay only during swipe */
+.swipe-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 2;
+  display: none; /* Hidden by default */
+}
+
+.swipe-overlay.active {
+  display: block;
 }

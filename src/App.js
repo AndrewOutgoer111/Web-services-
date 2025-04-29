@@ -10,21 +10,24 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
-  // Function to disable iframe interaction during swipe
   const handleBeforeChange = () => {
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
+    document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
+      overlay.classList.add("active");
     });
   };
-
-  // Function to re-enable iframe interaction after swipe
+  
   const handleAfterChange = () => {
+    document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
+      overlay.classList.remove("active");
+    });
+  
     requestAnimationFrame(() => {
       document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
+        iframe.style.pointerEvents = "auto"; // Ensure interaction
       });
     });
   };
+  
 
   // Slider configuration
   const sliderSettings = {
