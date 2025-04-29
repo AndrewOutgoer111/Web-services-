@@ -11,8 +11,11 @@ import AboutPage from './components/AboutPage';
 
 const App = () => {
   const handleBeforeChange = () => {
+    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+      iframe.style.pointerEvents = "none"; // Temporarily disable interaction
+    });
     document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
-      overlay.classList.add("active");
+      overlay.classList.add("active"); // Show overlay
     });
   };
   
