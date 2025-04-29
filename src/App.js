@@ -39,10 +39,12 @@ const App = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
+    draggable: true,         // <-- Ensures mouse/finger dragging works
+    swipeToSlide: true,      // <-- Lets users drag directly to any slide
     beforeChange: handleBeforeChange, // Fix swipe issue
     afterChange: handleAfterChange,
     responsive: [

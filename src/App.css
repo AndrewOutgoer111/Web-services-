@@ -148,9 +148,13 @@ main {
   width: 100%;
   height: 100%;
   background: transparent;
+  pointer-events: auto; 
   z-index: 2; /* Ensures it sits above the iframe */
 }
 
+.swipe-overlay.active {
+  opacity: 1;
+}
 
 /* About Section */
 .about-section {
