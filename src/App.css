@@ -307,3 +307,11 @@ main {
 .swipe-overlay.active {
   display: block;
 }
+
+/* Force pointer-events none for small screens always */
+@media screen and (max-width: 768px) {
+  .slide-iframe {
+    pointer-events: none !important; /* Prevent iframe from blocking touch */
+  }
+}
+

@@ -23,6 +23,16 @@ const App = () => {
     document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
       overlay.classList.remove("active");
     });
+
+     // Only re-enable iframe interaction on large screens
+  if (window.innerWidth > 768) {
+    requestAnimationFrame(() => {
+      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+        iframe.style.pointerEvents = "auto";
+      });
+    });
+  }
+
   
     requestAnimationFrame(() => {
       document.querySelectorAll(".slide-iframe").forEach((iframe) => {
