@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react';
 import { HashRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import './App.css';
@@ -11,47 +10,21 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
-  const sliderRef = useRef(null);
-  let startX = 0;
-  let startY = 0;
-
-  const handleTouchStart = (e) => {
-    startX = e.touches[0].clientX;
-    startY = e.touches[0].clientY;
-  };
-
-  const handleTouchMove = (e) => {
-    const dx = Math.abs(e.touches[0].clientX - startX);
-    const dy = Math.abs(e.touches[0].clientY - startY);
-
-    const isHorizontalSwipe = dx > dy;
-
+  // Function to disable iframe interaction during swipe
+  const handleBeforeChange = () => {
     document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = isHorizontalSwipe ? "none" : "auto";
+      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
     });
   };
 
+  // Function to re-enable iframe interaction after swipe
   const handleAfterChange = () => {
-    // Always re-enable interaction after swipe
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "auto";
+    requestAnimationFrame(() => {
+      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
+      });
     });
   };
-
-  useEffect(() => {
-    const container = sliderRef.current;
-    if (container) {
-      container.addEventListener("touchstart", handleTouchStart, { passive: true });
-      container.addEventListener("touchmove", handleTouchMove, { passive: true });
-    }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("touchstart", handleTouchStart);
-        container.removeEventListener("touchmove", handleTouchMove);
-      }
-    };
-  }, []);
 
   // Slider configuration
   const sliderSettings = {
@@ -64,6 +37,7 @@ const App = () => {
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
+    beforeChange: handleBeforeChange, // Fix swipe issue
     afterChange: handleAfterChange,
     responsive: [
       {
@@ -95,18 +69,28 @@ const App = () => {
       </section>
 
       {/* Slideshow Section */}
-      <div className="slideshow-container" role="region" aria-label="Website Showcase" ref={sliderRef}>
+      <div className="slideshow-container" role="region" aria-label="Website Showcase">
         <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
-              <div className="iframe-container">
-                <iframe
-                  src={page.url}
-                  title={`GitHub Page ${index + 1}`}
-                  className="slide-iframe"
-                  loading="lazy"
-                ></iframe>
-              </div>
+           <div className="iframe-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+   <div className="swipe-overlay" style={{
+      position: 'absolute',
+       top: 0,
+      left: 0,
+       width: '100%',
+       height: '100%',
+       zIndex: 2,
+     }} />
+     <iframe
+       src={page.url}
+       title={`GitHub Page ${index + 1}`}
+       className="slide-iframe"
+      loading="lazy"
+      style={{ zIndex: 1 }}
+   ></iframe>
+  </div>
+
               <h3 className="slide-caption">{page.caption}</h3>
             </div>
           ))}
