@@ -5,36 +5,39 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
+
+// Component Imports
+import AboutPage from './components/AboutPage';
 import { useEffect } from 'react';
 
-import AboutPage from './components/AboutPage';
-
 const App = () => {
-  // Variables to track touch start
+
   let startX = 0;
   let startY = 0;
-
+  
   const handleTouchStart = (e) => {
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
   };
-
+  
   const handleTouchMove = (e) => {
     const dx = Math.abs(e.touches[0].clientX - startX);
     const dy = Math.abs(e.touches[0].clientY - startY);
+  
     const isHorizontalSwipe = dx > dy;
-
+  
     document.querySelectorAll(".slide-iframe").forEach((iframe) => {
       iframe.style.pointerEvents = isHorizontalSwipe ? "none" : "auto";
     });
   };
-
+  
   const handleAfterChange = () => {
-    // Always re-enable pointer events after swipe ends
+    // Always re-enable interaction after swipe
     document.querySelectorAll(".slide-iframe").forEach((iframe) => {
       iframe.style.pointerEvents = "auto";
     });
   };
+  
 
   useEffect(() => {
     const container = document.querySelector(".slideshow-container");
@@ -42,6 +45,7 @@ const App = () => {
       container.addEventListener("touchstart", handleTouchStart, { passive: true });
       container.addEventListener("touchmove", handleTouchMove, { passive: true });
     }
+  
     return () => {
       if (container) {
         container.removeEventListener("touchstart", handleTouchStart);
@@ -49,7 +53,13 @@ const App = () => {
       }
     };
   }, []);
+  
 
+
+
+
+
+  // Slider configuration
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -60,13 +70,21 @@ const App = () => {
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
+    
     afterChange: handleAfterChange,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 1 } },
-      { breakpoint: 600, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 1024,
+        settings: { slidesToShow: 1 },
+      },
+      {
+        breakpoint: 600,
+        settings: { slidesToShow: 1 },
+      },
     ],
   };
 
+  // URLs for GitHub deployed pages
   const githubPages = [
     { url: 'https://andrewoutgoer111.github.io/mas1/', caption: 'Page 1' },
     { url: 'https://andrewoutgoer111.github.io/webpage2/', caption: 'Page 2' },
@@ -75,36 +93,44 @@ const App = () => {
     { url: 'https://andrewoutgoer111.github.io/webpage5/', caption: 'Page 5' },
   ];
 
+  // Home component with GitHub page links in the slideshow
   const HomeWithSlideshow = () => (
     <div>
+      {/* Headline Section */}
       <section className="headline-section">
         <h1 className="headline">Order Your Website Solution Today!</h1>
       </section>
 
+      {/* Slideshow Section */}
       <div className="slideshow-container" role="region" aria-label="Website Showcase">
         <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
-              <div className="iframe-container" style={{ width: '100%', height: '100%' }}>
-                <iframe
-                  src={page.url}
-                  title={`GitHub Page ${index + 1}`}
-                  className="slide-iframe"
-                  loading="lazy"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    border: 'none',
-                    pointerEvents: 'auto',
-                  }}
-                ></iframe>
-              </div>
+           <div className="iframe-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
+   <div className="swipe-overlay" style={{
+      position: 'absolute',
+       top: 0,
+      left: 0,
+       width: '100%',
+       height: '100%',
+       zIndex: 2,
+     }} />
+     <iframe
+       src={page.url}
+       title={`GitHub Page ${index + 1}`}
+       className="slide-iframe"
+      loading="lazy"
+      style={{ zIndex: 1 }}
+   ></iframe>
+  </div>
+
               <h3 className="slide-caption">{page.caption}</h3>
             </div>
           ))}
         </Slider>
       </div>
 
+      {/* About Section */}
       <section id="about" className="about-section">
         <h2>About Us</h2>
         <p>
@@ -114,6 +140,7 @@ const App = () => {
         </p>
       </section>
 
+      {/* Contact Section */}
       <section id="contact" className="contact-section">
         <h2>Contact Me</h2>
         <div className="contact-links">
@@ -134,6 +161,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
+        {/* Header */}
         <header className="App-header">
           <div className="header-container">
             <div className="brand-name">
@@ -148,6 +176,7 @@ const App = () => {
           </div>
         </header>
 
+        {/* Main Content */}
         <main>
           <Routes>
             <Route path="/" element={<HomeWithSlideshow />} />
@@ -155,18 +184,37 @@ const App = () => {
           </Routes>
         </main>
 
+        {/* Footer */}
         <footer className="footer-container">
           <div className="footer-left">
             <p>© 2025 AndreWillDoIt. All rights reserved.</p>
           </div>
           <div className="footer-right">
-            <a href="https://wa.me/+971544571947" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="WhatsApp">
+            <a 
+              href="https://wa.me/+971544571947" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-icon" 
+              aria-label="WhatsApp"
+            >
               <FaWhatsapp />
             </a>
-            <a href="https://t.me/YOUR_TELEGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="Telegram">
+            <a 
+              href="https://t.me/YOUR_TELEGRAM_USERNAME" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-icon" 
+              aria-label="Telegram"
+            >
               <FaTelegramPlane />
             </a>
-            <a href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" target="_blank" rel="noopener noreferrer" className="contact-icon" aria-label="Instagram">
+            <a 
+              href="https://instagram.com/YOUR_INSTAGRAM_USERNAME" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-icon" 
+              aria-label="Instagram"
+            >
               <FaInstagram />
             </a>
           </div>
