@@ -8,23 +8,56 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 
 // Component Imports
 import AboutPage from './components/AboutPage';
+import { useEffect } from 'react';
 
 const App = () => {
-  // Function to disable iframe interaction during swipe
-  const handleBeforeChange = () => {
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none"; // Disable interaction while swiping
-    });
-  };
 
-  // Function to re-enable iframe interaction after swipe
-  const handleAfterChange = () => {
-    requestAnimationFrame(() => {
-      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto"; // Re-enable interaction after swipe
-      });
+  let startX = 0;
+  let startY = 0;
+  
+  const handleTouchStart = (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  };
+  
+  const handleTouchMove = (e) => {
+    const dx = Math.abs(e.touches[0].clientX - startX);
+    const dy = Math.abs(e.touches[0].clientY - startY);
+  
+    const isHorizontalSwipe = dx > dy;
+  
+    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+      iframe.style.pointerEvents = isHorizontalSwipe ? "none" : "auto";
     });
   };
+  
+  const handleAfterChange = () => {
+    // Always re-enable interaction after swipe
+    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
+      iframe.style.pointerEvents = "auto";
+    });
+  };
+  
+
+  useEffect(() => {
+    const container = document.querySelector(".slideshow-container");
+    if (container) {
+      container.addEventListener("touchstart", handleTouchStart, { passive: true });
+      container.addEventListener("touchmove", handleTouchMove, { passive: true });
+    }
+  
+    return () => {
+      if (container) {
+        container.removeEventListener("touchstart", handleTouchStart);
+        container.removeEventListener("touchmove", handleTouchMove);
+      }
+    };
+  }, []);
+  
+
+
+
+
 
   // Slider configuration
   const sliderSettings = {
@@ -37,7 +70,7 @@ const App = () => {
     autoplaySpeed: 5000,
     swipe: true,
     touchMove: true,
-    beforeChange: handleBeforeChange, // Fix swipe issue
+    
     afterChange: handleAfterChange,
     responsive: [
       {
