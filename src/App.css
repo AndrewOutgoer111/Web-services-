@@ -81,6 +81,8 @@ main {
 /* Slide container */
 .slide {
   width: 100%;
+  overflow-y: auto; /* Enable scrolling if content is larger */
+  -webkit-overflow-scrolling: touch;
   flex: 1; /* Allows it to take available height */
   display: flex;
   align-items: center;
@@ -94,7 +96,7 @@ main {
   max-height: calc(100vh - 20px); /* Adjust dynamically */
   border: none;
   object-fit: cover;
-  pointer-events: auto;
+  pointer-events: none;
 
 }
 
