@@ -5,21 +5,21 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
-// Component Imports
 import AboutPage from './components/AboutPage';
 
 const App = () => {
+  // Variables to track touch start
   let startX = 0;
   let startY = 0;
 
-  const handleTouchStart = useCallback((e) => {
+  const handleTouchStart = (e) => {
     startX = e.touches[0].clientX;
     startY = e.touches[0].clientY;
-  }, []);
+  };
 
-  const handleTouchMove = useCallback((e) => {
+  const handleTouchMove = (e) => {
     const dx = Math.abs(e.touches[0].clientX - startX);
     const dy = Math.abs(e.touches[0].clientY - startY);
     const isHorizontalSwipe = dx > dy;
@@ -27,10 +27,10 @@ const App = () => {
     document.querySelectorAll(".slide-iframe").forEach((iframe) => {
       iframe.style.pointerEvents = isHorizontalSwipe ? "none" : "auto";
     });
-  }, []);
+  };
 
   const handleAfterChange = () => {
-    // Always re-enable interaction after swipe
+    // Always re-enable pointer events after swipe ends
     document.querySelectorAll(".slide-iframe").forEach((iframe) => {
       iframe.style.pointerEvents = "auto";
     });
@@ -42,14 +42,13 @@ const App = () => {
       container.addEventListener("touchstart", handleTouchStart, { passive: true });
       container.addEventListener("touchmove", handleTouchMove, { passive: true });
     }
-
     return () => {
       if (container) {
         container.removeEventListener("touchstart", handleTouchStart);
         container.removeEventListener("touchmove", handleTouchMove);
       }
     };
-  }, [handleTouchStart, handleTouchMove]);
+  }, []);
 
   const sliderSettings = {
     dots: true,
