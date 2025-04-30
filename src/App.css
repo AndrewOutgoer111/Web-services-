@@ -97,7 +97,6 @@ main {
   max-height: calc(100vh - 20px); /* Adjust dynamically */
   border: none;
   object-fit: cover;
-  pointer-events: none;
   overflow: auto; 
 
 }
@@ -110,7 +109,7 @@ main {
 
   .slide-iframe {
     height: 90vh; /* Allows better fit for small screens */
-    pointer-events: none; /* Allow touch gestures to pass through the iframe */
+   
   }
 }
 
@@ -289,7 +288,7 @@ main {
   .slide-iframe {
     height: 80vh;            /* Leaves space for scrolling */
     max-height: 80vh;
-    pointer-events: auto
+   
   }
 }
 

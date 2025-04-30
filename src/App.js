@@ -62,16 +62,45 @@ const App = () => {
         <Slider {...sliderSettings}>
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
-           <div className="iframe-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
-   
-     <iframe
-       src={page.url}
-       title={`GitHub Page ${index + 1}`}
-       className="slide-iframe"
-      loading="lazy"
-      style={{ zIndex: 1 }}
-   ></iframe>
-  </div>
+           <div
+  className="iframe-container"
+  style={{ position: 'relative', width: '100%', height: '100%' }}
+  onMouseEnter={(e) => {
+    const iframe = e.currentTarget.querySelector('iframe');
+    if (iframe) iframe.style.pointerEvents = 'auto';
+  }}
+  onMouseLeave={(e) => {
+    const iframe = e.currentTarget.querySelector('iframe');
+    if (iframe) iframe.style.pointerEvents = 'none';
+  }}
+  onTouchStart={(e) => {
+    const iframe = e.currentTarget.querySelector('iframe');
+    if (iframe) iframe.style.pointerEvents = 'auto';
+  }}
+  onTouchEnd={(e) => {
+    const iframe = e.currentTarget.querySelector('iframe');
+    if (iframe) {
+      setTimeout(() => {
+        iframe.style.pointerEvents = 'none';
+      }, 1500); // You can increase this delay if needed
+    }
+  }}
+>
+  <iframe
+    src={page.url}
+    title={`GitHub Page ${index + 1}`}
+    className="slide-iframe"
+    loading="lazy"
+    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+    style={{
+      width: '100%',
+      height: '100vh',
+      border: 'none',
+      pointerEvents: 'none',
+    }}
+  ></iframe>
+</div>
+
 
               <h3 className="slide-caption">{page.caption}</h3>
             </div>
