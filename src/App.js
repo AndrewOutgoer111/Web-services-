@@ -10,27 +10,7 @@ import { FaWhatsapp, FaTelegramPlane, FaInstagram } from "react-icons/fa";
 import AboutPage from './components/AboutPage';
 
 const App = () => {
-  const handleBeforeChange = () => {
-    document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none";
-    });
-    document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
-      overlay.classList.add("active");
-    });
-  };
-  
-  const handleAfterChange = () => {
-    document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
-      overlay.classList.remove("active");
-    });
-  
-    // Always re-enable iframe interaction after swipe ends
-    requestAnimationFrame(() => {
-      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto";
-      });
-    });
-  };
+
   
   
 
@@ -47,8 +27,7 @@ const App = () => {
     touchMove: true,
     draggable: true,         // <-- Ensures mouse/finger dragging works
     swipeToSlide: true,      // <-- Lets users drag directly to any slide
-    beforeChange: handleBeforeChange, // Fix swipe issue
-    afterChange: handleAfterChange,
+    
     responsive: [
       {
         breakpoint: 1024,
@@ -84,14 +63,7 @@ const App = () => {
           {githubPages.map((page, index) => (
             <div key={index} className="slide">
            <div className="iframe-container" style={{ position: 'relative', width: '100%', height: '100%' }}>
-   <div className="swipe-overlay" style={{
-      position: 'absolute',
-       top: 0,
-      left: 0,
-       width: '100%',
-       height: '100%',
-       zIndex: 2,
-     }} />
+   
      <iframe
        src={page.url}
        title={`GitHub Page ${index + 1}`}

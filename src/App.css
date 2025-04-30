@@ -296,21 +296,7 @@ main {
   flex-direction: column;
 }
 
-/* Show overlay only during swipe */
-.swipe-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  z-index: 2;
-  display: none; /* Hidden by default */
-}
 
-.swipe-overlay.active {
-  display: block;
-}
 
 /* Force pointer-events none for small screens always */
 @media screen and (max-width: 768px) {
