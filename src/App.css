@@ -96,7 +96,8 @@ main {
   max-height: calc(100vh - 20px); /* Adjust dynamically */
   border: none;
   object-fit: cover;
-  pointer-events: none;
+  pointer-events: auto;
+  overflow: auto; 
 
 }
 
@@ -150,12 +151,13 @@ main {
   width: 100%;
   height: 100%;
   background: transparent;
-  pointer-events: auto; 
+  pointer-events: none; 
   z-index: 2; /* Ensures it sits above the iframe */
 }
 
 .swipe-overlay.active {
-  opacity: 1;
+  display: block;
+  pointer-events: auto;  
 }
 
 /* About Section */
@@ -315,7 +317,7 @@ main {
   .slide-iframe {
     height: 80vh;            /* Leaves space for scrolling */
     max-height: 80vh;
-    pointer-events: none !important; /* Prevent iframe from blocking touch */
+    pointer-events: auto
   }
 }
 

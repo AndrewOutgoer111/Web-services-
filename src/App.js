@@ -12,10 +12,10 @@ import AboutPage from './components/AboutPage';
 const App = () => {
   const handleBeforeChange = () => {
     document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-      iframe.style.pointerEvents = "none"; // Temporarily disable interaction
+      iframe.style.pointerEvents = "none";
     });
     document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
-      overlay.classList.add("active"); // Show overlay
+      overlay.classList.add("active");
     });
   };
   
@@ -23,23 +23,15 @@ const App = () => {
     document.querySelectorAll(".swipe-overlay").forEach((overlay) => {
       overlay.classList.remove("active");
     });
-
-     // Only re-enable iframe interaction on large screens
-  if (window.innerWidth > 768) {
+  
+    // Always re-enable iframe interaction after swipe ends
     requestAnimationFrame(() => {
       document.querySelectorAll(".slide-iframe").forEach((iframe) => {
         iframe.style.pointerEvents = "auto";
       });
     });
-  }
-
-  
-    requestAnimationFrame(() => {
-      document.querySelectorAll(".slide-iframe").forEach((iframe) => {
-        iframe.style.pointerEvents = "auto"; // Ensure interaction
-      });
-    });
   };
+  
   
 
   // Slider configuration
