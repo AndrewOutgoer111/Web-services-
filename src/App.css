@@ -86,7 +86,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  touch-action: pan-y; /* Allows vertical scroll inside iframe */
+  
 }
 
 
@@ -97,7 +97,7 @@ main {
   max-height: calc(100vh - 20px); /* Adjust dynamically */
   border: none;
   object-fit: cover;
-  pointer-events: auto;
+  pointer-events: none;
   overflow: auto; 
 
 }
