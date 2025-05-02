@@ -43,7 +43,7 @@ const App = () => {
   // URLs for GitHub deployed pages
   const githubPages = [
     { url: 'https://andrewoutgoer111.github.io/mas1/', caption: 'Page 1' },
-    { url: 'https://andrewoutgoer111.github.io/webpage2/', caption: 'Page 2' },
+    { url: 'https://andrewoutgoer111.github.io/webpage-2/', caption: 'Page 2' },
     { url: 'https://andrewoutgoer111.github.io/webpage3/', caption: 'Page 3' },
     { url: 'https://andrewoutgoer111.github.io/webpage4/', caption: 'Page 4' },
     { url: 'https://andrewoutgoer111.github.io/webpage5/', caption: 'Page 5' },
