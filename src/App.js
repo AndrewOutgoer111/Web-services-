@@ -57,8 +57,11 @@ const App = () => {
     <div>
       {/* Headline Section */}
       <section className="headline-section">
-        <h1 className="headline">Order Your Website Solution Today!</h1>
-      </section>
+        <h1 className="headline">Affordable Web Design by a Freelance Web Developer</h1>
+        <h2>I build websites for small businesses and online stores.</h2>
+        
+
+</section>
 
       {/* Slideshow Section */}
       <div className="slideshow-container" role="region" aria-label="Website Showcase">
@@ -91,7 +94,7 @@ const App = () => {
 >
   <iframe
     src={page.url}
-    title={`GitHub Page ${index + 1}`}
+    title={`Ecommerce Website Design Preview  ${index + 1}`}
     className="slide-iframe"
     loading="lazy"
     sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
