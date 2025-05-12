@@ -45,14 +45,28 @@
 .headline-section {
   margin-top: 10px;
   padding: 10px;
+  text-align: center;
 }
 
 .headline {
   font-size: 3rem;
-  font-family: 'TT Espina', serif;
+  font-family: 'Poppins', sans-serif; /* Change from TT Espina to Poppins */
   color: #000000;
   margin: 10px 0;
 }
+
+/* Responsive adjustments for smartphones */
+@media (max-width: 768px) {
+  .headline {
+    font-size: 2rem;
+    padding: 0 10px;
+  }
+
+  .headline-section {
+    padding: 20px 10px;
+  }
+}
+
 
 /* Main Content Section */
 main {
