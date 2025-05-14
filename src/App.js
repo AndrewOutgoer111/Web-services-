@@ -57,8 +57,8 @@ const App = () => {
     <div>
       {/* Headline Section */}
       <section className="headline-section">
-        <h1 className="headline">Affordable Web Design by a Freelance Web Developer</h1>
-        <h2>I build websites for small businesses and online stores.</h2>
+        <h1 className="headline">High Quality Web Services</h1>
+        <p className="tagline">Professional Websites Without the Agency Price</p>
         
 
 </section>
